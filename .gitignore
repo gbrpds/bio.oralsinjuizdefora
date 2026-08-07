@@ -1,0 +1,11 @@
+# Arquivos de sistema
+.DS_Store
+Thumbs.db
+
+# Arquivos originais pesados do Photoshop (suba só os PNGs exportados)
+*.psd
+*.psb
+
+# Dependências / build (caso a gente use no futuro)
+node_modules/
+dist/
