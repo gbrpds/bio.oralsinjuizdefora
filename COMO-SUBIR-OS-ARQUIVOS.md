@@ -1,50 +1,50 @@
-# Guia de upload dos arquivos 📂
+# Guia de upload das imagens 📂
 
-Este é o guia pra você subir os arquivos exportados do Photoshop. Coloque cada
-tipo de arquivo na pasta certa que eu consigo montar o site direitinho.
+Agora é **uma pasta só**: suba tudo em **`assets/`**.
 
-## Onde colocar cada coisa
+O site já está montado com placeholders (as caixas listradas verdes mostram o
+nome do arquivo que falta). Assim que você subir cada imagem com o **nome
+certo**, ela aparece automaticamente no lugar.
 
-| Pasta | O que colocar aqui |
-|-------|--------------------|
-| `reference/` | **A print do layout inteiro** (como o linktree deve ficar completo). Pode ser 1 imagem só. Ex: `layout-completo.png` |
-| `assets/layers/` | **Todas as camadas em PNG** exportadas do Photoshop (fundo, textos, botões, decorações, etc). Pode subir tudo aqui de uma vez. |
-| `assets/backgrounds/` | Só o(s) fundo(s), se você quiser separar do resto |
-| `assets/logo/` | A logo / marca |
-| `assets/profile/` | Foto de perfil / avatar (se tiver) |
-| `assets/icons/` | Ícones das redes sociais (Instagram, WhatsApp, etc) se estiverem separados |
+## Nomes dos arquivos que o site espera
 
-> Se ficar em dúvida, joga tudo em `assets/layers/` que eu organizo depois.
+Suba os PNGs em `assets/` com **exatamente estes nomes**:
 
-## Dica na hora de exportar
+| Arquivo | O que é |
+|---------|---------|
+| `hero.png` | Foto grande do topo (a dentista atendendo a paciente) |
+| `logo.png` | Logo Oral Sin Implantes (o selo verde do meio) |
+| `card-contato.png` | Miniatura do card "Entrar em Contato" (recepção) |
+| `card-site.png` | Miniatura do card "Acesse nosso Site" |
+| `card-localizacao.png` | Miniatura do card "Localização" (mapa) |
+| `card-blog.png` | Miniatura do card "Blog Oral Sin JF" |
+| `card-quiz.png` | Miniatura do card "Quiz" |
+| `favicon.png` | (opcional) ícone da aba do navegador |
 
-- Exporte cada camada em **PNG com fundo transparente** quando fizer sentido.
-- Mantenha o **nome de cada camada** parecido com o que ela é
-  (ex: `botao-instagram.png`, `fundo.png`, `titulo.png`). Isso me ajuda a
-  identificar cada peça.
-- Se souber, me diga o **tamanho da prancheta** (largura x altura em px) que
-  você usou no Photoshop.
+> Não precisa acertar tudo de uma vez. Pode subir aos poucos — o que faltar
+> continua como placeholder.
 
-## Como subir pelo GitHub (mais fácil)
+## Como subir pelo GitHub
 
-1. Entre na pasta certa aqui no GitHub (ex: `assets/layers`)
-2. Clique em **Add file → Upload files**
-3. Arraste todos os PNGs
-4. Clique em **Commit changes**
+1. Abra a pasta **`assets`** aqui no GitHub
+2. **Add file → Upload files**
+3. Arraste os PNGs (com os nomes da tabela acima)
+4. Em **Commit changes**, selecione a branch **`claude/linktree-site-setup-tl9ibh`**
+5. Confirme
 
-## Depois que você subir
+## Depois
 
-Me avise que você subiu tudo. Eu vou:
+Me avise quando subir. Aí eu:
 
-1. Analisar a print do layout e as camadas
-2. Montar o site (HTML + CSS) reproduzindo o visual
-3. Deixar os botões/links funcionando
-4. Deixar responsivo (funciona bem no celular)
+- Ajusto tamanhos/posições pra bater 100% com o layout
+- Coloco os links reais nos botões e cards
 
-## O que ainda preciso saber de você
+## O que vou te pedir pra finalizar os links
 
-Quando for montar os links, me passe:
-
-- [ ] Para onde cada botão/link deve levar (URLs do Instagram, WhatsApp, site, etc)
-- [ ] Textos exatos que devem aparecer (se não estiverem só na imagem)
-- [ ] Se tem algum domínio próprio pra publicar (ex: `bio.oralsinjuizdefora.com.br`)
+- [ ] Link do botão **Entrar em Contato** (WhatsApp? Ex: `https://wa.me/55329...`)
+- [ ] Link do **site** oficial
+- [ ] Link da **Localização** (Google Maps)
+- [ ] Link do **Blog**
+- [ ] Link do **Quiz**
+- [ ] Para onde vão os **2 botões pill** de cima (redes sociais? Instagram?)
+- [ ] Se tem **domínio próprio** pra publicar
