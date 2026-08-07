@@ -11,8 +11,11 @@ Site estático (HTML + CSS) montado a partir do layout feito no Photoshop.
 ├── index.html          # a página
 ├── styles.css          # estilos
 ├── reference/          # print do layout completo (referência visual)
+├── script.js           # animações de entrada (scroll reveal)
 └── assets/
-    ├── hero.png            # banner do topo (foto + logo + botões)
+    ├── hero.png            # banner original completo (usado no compartilhamento)
+    ├── hero-photo.png      # só a foto do topo (recortada)
+    ├── logo.png            # logo Oral Sin (fundo transparente)
     ├── card-contato.png    # card "Entrar em Contato"
     ├── card-site.png       # card "Acesse nosso Site"
     ├── card-localizacao.png# card "Localização"

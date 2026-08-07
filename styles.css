@@ -1,29 +1,33 @@
 /* ============================================================
    Oral Sin Implantes · Juiz de Fora — Linktree
-   Layout montado a partir das imagens exportadas do Photoshop
-   (prancheta de 1080px de largura). Cada peça é uma imagem
-   completa e clicável.
+   Montado a partir das imagens exportadas do Photoshop (1080px).
+   Barra inferior (sociais + logo) reconstruída em HTML.
    ============================================================ */
 
 :root {
-  /* Largura de referência da prancheta */
-  --canvas: 1080;
-  /* Coluna exibida (estilo bio/mobile) */
   --page-width: 640px;
 
-  /* Proporções tiradas do layout original (em relação aos 1080px):
-     cards = 896px (~83%), rodapé = 864px (~80%) */
-  --card-inset: 8.5%;   /* (1080-896)/2 /1080 */
-  --footer-inset: 10%;  /* (1080-864)/2 /1080 */
+  /* Proporções do layout original (1080px de referência) */
+  --card-inset: 8.5%;    /* cards = 896/1080 */
+  --footer-inset: 10%;   /* rodapé = 864/1080 */
+
+  /* Marca */
+  --green:       #12833f;
+  --green-dark:  #0c6a31;
+
+  /* Cores das redes */
+  --wa: #25d366;
+  --fb: #1877f2;
+
+  --ease: cubic-bezier(.22, .7, .2, 1);
 }
 
 * { box-sizing: border-box; }
-
 html, body { margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
 
 body {
   font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
-  /* Fundo verde suave, como no layout */
   background: linear-gradient(180deg, #eafaf0 0%, #dff5e7 45%, #eafaf0 100%);
   background-attachment: fixed;
   -webkit-font-smoothing: antialiased;
@@ -41,56 +45,144 @@ img { display: block; max-width: 100%; height: auto; }
 }
 
 /* ===================== HERO ===================== */
-.hero {
-  position: relative;
-  line-height: 0;
-}
-.hero__img { width: 100%; }
+.hero { position: relative; }
 
-/* Áreas clicáveis sobre os dois botões verdes do banner.
-   Posições em % relativas à imagem do banner (1080x992). */
-.hero__pill {
-  position: absolute;
-  top: 92.3%;
-  height: 5.4%;
-  border-radius: 999px;
-  z-index: 2;
-  /* deixe visível durante o ajuste trocando para rgba(255,0,0,.3) */
-  background: transparent;
+.hero__media {
+  line-height: 0;
+  overflow: hidden;
+  border-radius: 0 0 26px 26px;
+  box-shadow: 0 12px 26px rgba(12, 60, 30, 0.16);
 }
-.hero__pill--left  { left: 10.6%; width: 16.4%; }
-.hero__pill--right { left: 73.2%; width: 16.4%; }
+.hero__img {
+  width: 100%;
+  animation: heroIn 1s var(--ease) both;
+  transform-origin: 60% 40%;
+}
+@keyframes heroIn {
+  from { opacity: 0; transform: scale(1.06); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+/* Barra: sociais acima do logo, subindo levemente sobre a foto */
+.hero__bar {
+  position: relative;
+  z-index: 3;
+  margin-top: -30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  padding: 0 22px 4px;
+}
+
+/* --- Botões sociais --- */
+.socials { display: flex; gap: 16px; }
+.soc {
+  --sz: 52px;
+  width: var(--sz);
+  height: var(--sz);
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  color: #fff;
+  text-decoration: none;
+  /* traçado branco fino e discreto */
+  border: 1.5px solid rgba(255, 255, 255, 0.9);
+  box-shadow: 0 6px 16px rgba(12, 60, 30, 0.22);
+  transition: transform .25s var(--ease), box-shadow .25s var(--ease), filter .25s var(--ease);
+  /* entrada escalonada */
+  opacity: 0;
+  animation: socIn .55s var(--ease) forwards;
+}
+.soc:nth-child(1) { animation-delay: .35s; }
+.soc:nth-child(2) { animation-delay: .47s; }
+.soc:nth-child(3) { animation-delay: .59s; }
+@keyframes socIn {
+  from { opacity: 0; transform: translateY(10px) scale(.8); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+.soc svg { width: 54%; height: 54%; fill: currentColor; }
+
+.soc--wa { background: var(--wa); }
+.soc--fb { background: var(--fb); }
+.soc--ig {
+  background:
+    radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);
+}
+.soc:hover {
+  transform: translateY(-4px) scale(1.08);
+  box-shadow: 0 12px 22px rgba(12, 60, 30, 0.3);
+}
+.soc:active { transform: translateY(-1px) scale(1.03); }
+
+/* --- Logo --- */
+.brand { line-height: 0; }
+.brand img {
+  height: 46px;
+  width: auto;
+  filter: drop-shadow(0 5px 10px rgba(12, 60, 30, 0.22));
+  transition: transform .3s var(--ease);
+}
+.brand:hover img { transform: translateY(-2px) scale(1.03); }
 
 /* ===================== LINKS / CARDS ===================== */
 .links {
   display: flex;
   flex-direction: column;
   gap: 22px;
-  padding: 34px var(--card-inset) 26px;
+  padding: 30px var(--card-inset) 26px;
 }
 
 .card {
   display: block;
   line-height: 0;
   border-radius: 16px;
-  transition: transform .18s ease, filter .18s ease;
+  transition: transform .28s var(--ease), filter .28s var(--ease);
+  will-change: transform;
 }
 .card img { width: 100%; border-radius: 16px; }
 .card:hover {
-  transform: translateY(-3px);
-  filter: drop-shadow(0 12px 22px rgba(18, 83, 40, 0.22));
+  transform: translateY(-5px) scale(1.012);
+  filter: drop-shadow(0 16px 26px rgba(18, 83, 40, 0.26));
 }
-.card:active { transform: translateY(-1px); }
+.card:active { transform: translateY(-2px) scale(1.004); }
 
 /* ===================== RODAPÉ ===================== */
 .footer {
   line-height: 0;
   padding: 12px var(--footer-inset) 30px;
 }
-.footer img { width: 100%; }
+.footer img {
+  width: 100%;
+  transition: transform .3s var(--ease);
+}
+.footer:hover img { transform: translateY(-2px); }
+
+/* ===================== ANIMAÇÃO DE ENTRADA (scroll) ===================== */
+.reveal {
+  opacity: 0;
+  transform: translateY(26px);
+  transition: opacity .6s var(--ease), transform .6s var(--ease);
+}
+.reveal.is-visible { opacity: 1; transform: none; }
 
 /* ===================== RESPONSIVO ===================== */
 @media (max-width: 460px) {
   .links { gap: 16px; padding: 24px var(--card-inset) 20px; }
   .footer { padding: 8px var(--footer-inset) 22px; }
+  .soc { --sz: 46px; }
+  .socials { gap: 13px; }
+  .brand img { height: 40px; }
+  .hero__bar { margin-top: -24px; gap: 11px; }
+}
+
+/* ===================== ACESSIBILIDADE ===================== */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+  .reveal { opacity: 1; transform: none; }
+  .soc { opacity: 1; }
 }
