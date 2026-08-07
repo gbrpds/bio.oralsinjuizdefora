@@ -1,225 +1,96 @@
 /* ============================================================
    Oral Sin Implantes · Juiz de Fora — Linktree
-   Layout de referência: prancheta 1080px de largura (retrato)
+   Layout montado a partir das imagens exportadas do Photoshop
+   (prancheta de 1080px de largura). Cada peça é uma imagem
+   completa e clicável.
    ============================================================ */
 
 :root {
-  /* Cores da marca (ajustar quando tivermos os valores exatos) */
-  --green:        #12833f;   /* verde principal Oral Sin */
-  --green-dark:   #0c6a31;   /* verde escuro (rodapé/hover) */
-  --green-title:  #0f7a3a;   /* verde dos títulos serifados */
-  --text:         #2b2b2b;   /* texto dos subtítulos */
-  --text-soft:    #4a4a4a;
-  --card-bg:      #ffffff;
-  --shadow:       0 14px 30px rgba(18, 83, 40, 0.14);
-  --shadow-media: 0 10px 22px rgba(0, 0, 0, 0.20);
+  /* Largura de referência da prancheta */
+  --canvas: 1080;
+  /* Coluna exibida (estilo bio/mobile) */
+  --page-width: 640px;
 
-  /* Largura do "papel" — a prancheta é 1080px.
-     Exibimos como coluna estilo bio/mobile. */
-  --page-width: 680px;
-  --radius: 18px;
+  /* Proporções tiradas do layout original (em relação aos 1080px):
+     cards = 896px (~83%), rodapé = 864px (~80%) */
+  --card-inset: 8.5%;   /* (1080-896)/2 /1080 */
+  --footer-inset: 10%;  /* (1080-864)/2 /1080 */
 }
 
 * { box-sizing: border-box; }
 
-html, body {
-  margin: 0;
-  padding: 0;
-}
+html, body { margin: 0; padding: 0; }
 
 body {
-  font-family: "Poppins", system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
-  color: var(--text);
-  /* Fundo verde bem suave, como no layout */
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  /* Fundo verde suave, como no layout */
   background: linear-gradient(180deg, #eafaf0 0%, #dff5e7 45%, #eafaf0 100%);
   background-attachment: fixed;
   -webkit-font-smoothing: antialiased;
 }
 
+img { display: block; max-width: 100%; height: auto; }
+
 .page {
   max-width: var(--page-width);
   margin: 0 auto;
-  background: linear-gradient(180deg, #f2fbf5 0%, #e7f7ee 100%);
+  background: linear-gradient(180deg, #f2fbf5 0%, #e7f7ee 55%, #eafaf0 100%);
   min-height: 100vh;
-  box-shadow: 0 0 60px rgba(0,0,0,0.06);
+  box-shadow: 0 0 60px rgba(0, 0, 0, 0.06);
   overflow: hidden;
-}
-
-/* ===================== Placeholder de imagem ===================== */
-/* Enquanto o PNG não é enviado, mostramos uma caixa com o nome do arquivo.
-   Quando a imagem carrega, ela cobre o placeholder. Se der 404, o <img>
-   se remove (onerror) e o placeholder aparece. */
-.ph {
-  position: relative;
-  margin: 0;
-  background:
-    repeating-linear-gradient(45deg, #d6efdd 0 12px, #cdead6 12px 24px);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-}
-.ph::after {
-  content: attr(data-label);
-  position: absolute;
-  inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 8px;
-  font-size: 12px;
-  font-weight: 500;
-  color: #2f7d4b;
-  background: rgba(255,255,255,0.55);
-  text-align: center;
-  letter-spacing: .2px;
-}
-.ph > img {
-  position: relative;
-  z-index: 1;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
 }
 
 /* ===================== HERO ===================== */
 .hero {
   position: relative;
+  line-height: 0;
 }
-.hero__photo {
-  width: 100%;
-  aspect-ratio: 1080 / 720;   /* proporção aproximada da foto do topo */
-}
-.hero__photo::after { font-size: 15px; }
+.hero__img { width: 100%; }
 
-.hero__bar {
-  position: relative;
-  margin-top: -34px;          /* logo/pills sobrepõem a base da foto */
-  padding: 0 22px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 14px;
-  z-index: 3;
-}
-
-/* Botões pill (placeholder) */
-.pill {
-  flex: 1 1 0;
-  max-width: 150px;
-  height: 46px;
-  background: var(--green);
+/* Áreas clicáveis sobre os dois botões verdes do banner.
+   Posições em % relativas à imagem do banner (1080x992). */
+.hero__pill {
+  position: absolute;
+  top: 92.3%;
+  height: 5.4%;
   border-radius: 999px;
-  border: 3px solid #fff;
-  box-shadow: var(--shadow);
-  transition: background .18s ease, transform .18s ease;
+  z-index: 2;
+  /* deixe visível durante o ajuste trocando para rgba(255,0,0,.3) */
+  background: transparent;
 }
-.pill:hover { background: var(--green-dark); transform: translateY(-1px); }
-
-/* Logo central */
-.hero__logo {
-  flex: 0 0 auto;
-  width: 150px;
-  height: 62px;
-  background: #fff;
-  border-radius: 12px;
-  box-shadow: var(--shadow);
-}
-.hero__logo::after { font-size: 11px; }
-.hero__logo > img { object-fit: contain; padding: 8px; }
+.hero__pill--left  { left: 10.6%; width: 16.4%; }
+.hero__pill--right { left: 73.2%; width: 16.4%; }
 
 /* ===================== LINKS / CARDS ===================== */
 .links {
   display: flex;
   flex-direction: column;
-  gap: 26px;
-  padding: 40px 22px 30px;
+  gap: 22px;
+  padding: 34px var(--card-inset) 26px;
 }
 
 .card {
-  position: relative;
-  display: flex;
-  align-items: stretch;
-  gap: 18px;
-  background: var(--card-bg);
-  border-radius: var(--radius);
-  box-shadow: var(--shadow);
-  text-decoration: none;
-  color: inherit;
-  padding: 16px;
-  transition: transform .18s ease, box-shadow .18s ease;
+  display: block;
+  line-height: 0;
+  border-radius: 16px;
+  transition: transform .18s ease, filter .18s ease;
 }
+.card img { width: 100%; border-radius: 16px; }
 .card:hover {
   transform: translateY(-3px);
-  box-shadow: 0 20px 38px rgba(18, 83, 40, 0.20);
+  filter: drop-shadow(0 12px 22px rgba(18, 83, 40, 0.22));
 }
-
-.card__media {
-  flex: 0 0 40%;
-  border-radius: 12px;
-  aspect-ratio: 4 / 3;
-  align-self: center;
-  /* Miniatura levemente elevada, como no layout */
-  box-shadow: var(--shadow-media);
-}
-.card__media::after { font-size: 11px; }
-
-.card__body {
-  flex: 1 1 auto;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 6px;
-  padding-right: 6px;
-}
-.card__title {
-  font-family: "Playfair Display", Georgia, serif;
-  font-weight: 700;
-  color: var(--green-title);
-  font-size: clamp(22px, 5.2vw, 30px);
-  line-height: 1.05;
-  margin: 0;
-}
-.card__text {
-  font-weight: 300;
-  color: var(--text-soft);
-  font-size: clamp(13px, 3.4vw, 16px);
-  line-height: 1.35;
-  margin: 0;
-}
+.card:active { transform: translateY(-1px); }
 
 /* ===================== RODAPÉ ===================== */
 .footer {
-  margin: 10px 22px 26px;
-  background: var(--green);
-  color: #eaf7ee;
-  border-radius: 16px;
-  padding: 20px 24px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  font-size: 12.5px;
-  font-weight: 300;
-  box-shadow: var(--shadow);
+  line-height: 0;
+  padding: 12px var(--footer-inset) 30px;
 }
-.footer__dots { opacity: .8; letter-spacing: 3px; }
-.footer__hours { text-align: right; }
+.footer img { width: 100%; }
 
 /* ===================== RESPONSIVO ===================== */
 @media (max-width: 460px) {
-  .links { padding: 30px 16px 24px; gap: 20px; }
-  .card { padding: 12px; gap: 14px; }
-  .card__media { flex-basis: 42%; }
-  .footer {
-    flex-direction: column;
-    text-align: center;
-    gap: 6px;
-    margin: 10px 16px 20px;
-  }
-  .footer__hours { text-align: center; }
-  .hero__bar { gap: 10px; padding: 0 16px; }
-  .pill { height: 40px; }
-  .hero__logo { width: 128px; height: 54px; }
+  .links { gap: 16px; padding: 24px var(--card-inset) 20px; }
+  .footer { padding: 8px var(--footer-inset) 22px; }
 }

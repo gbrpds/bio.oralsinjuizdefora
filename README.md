@@ -8,22 +8,39 @@ Site estático (HTML + CSS) montado a partir do layout feito no Photoshop.
 
 ```
 .
+├── index.html          # a página
+├── styles.css          # estilos
 ├── reference/          # print do layout completo (referência visual)
-├── assets/
-│   ├── layers/         # camadas em PNG exportadas do Photoshop
-│   ├── backgrounds/    # fundos
-│   ├── logo/           # logo / marca
-│   ├── profile/        # foto de perfil
-│   └── icons/          # ícones de redes sociais
-└── COMO-SUBIR-OS-ARQUIVOS.md   # 👈 guia de como subir os arquivos
+└── assets/
+    ├── hero.png            # banner do topo (foto + logo + botões)
+    ├── card-contato.png    # card "Entrar em Contato"
+    ├── card-site.png       # card "Acesse nosso Site"
+    ├── card-localizacao.png# card "Localização"
+    ├── card-blog.png       # card "Blog Oral Sin JF"
+    ├── card-quiz.png       # card "Quiz"
+    ├── footer.png          # rodapé
+    └── _originais/         # camadas soltas / originais (não usadas na página)
 ```
 
 ## Status
 
 - [x] Estrutura de pastas criada
-- [ ] Upload dos assets (camadas + print)
-- [ ] Montagem do site
-- [ ] Configuração dos links
+- [x] Upload dos assets
+- [x] Montagem do site (fiel ao layout)
+- [ ] Configuração dos links reais
 - [ ] Publicação
 
-Veja **[COMO-SUBIR-OS-ARQUIVOS.md](./COMO-SUBIR-OS-ARQUIVOS.md)** pra começar.
+## Falta definir os links
+
+Cada card e os 2 botões do banner ainda apontam para `#`. Para finalizar,
+informe os destinos:
+
+| Elemento | Link |
+|----------|------|
+| Card **Entrar em Contato** | WhatsApp? (ex: `https://wa.me/5532...`) |
+| Card **Acesse nosso Site** | site oficial |
+| Card **Localização** | Google Maps |
+| Card **Blog Oral Sin JF** | URL do blog |
+| Card **Quiz** | URL do quiz |
+| Botão pill esquerdo (banner) | rede social? |
+| Botão pill direito (banner) | rede social? |
