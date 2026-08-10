@@ -27,20 +27,35 @@ html, body { margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
 
 body {
+  position: relative;
   font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
   background: linear-gradient(180deg, #eafaf0 0%, #dff5e7 45%, #eafaf0 100%);
   background-attachment: fixed;
   -webkit-font-smoothing: antialiased;
 }
 
+/* Fundo com a foto da fachada — blur + opacidade */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background: url("assets/4T7A7525.jpg") center / cover no-repeat;
+  filter: blur(12px);
+  opacity: 0.35;
+  transform: scale(1.06); /* evita bordas transparentes do blur */
+  pointer-events: none;
+}
+
 img { display: block; max-width: 100%; height: auto; }
 
 .page {
+  position: relative;
   max-width: var(--page-width);
   margin: 0 auto;
-  background: linear-gradient(180deg, #f2fbf5 0%, #e7f7ee 55%, #eafaf0 100%);
+  background: linear-gradient(180deg, rgba(242, 251, 245, 0.92) 0%, rgba(231, 247, 238, 0.92) 55%, rgba(234, 250, 240, 0.92) 100%);
   min-height: 100vh;
-  box-shadow: 0 0 60px rgba(0, 0, 0, 0.06);
+  box-shadow: 0 0 60px rgba(0, 0, 0, 0.10);
   overflow: hidden;
 }
 
@@ -48,12 +63,49 @@ img { display: block; max-width: 100%; height: auto; }
 .hero { position: relative; }
 
 .hero__media {
+  position: relative;
   line-height: 0;
   overflow: hidden;
   border-radius: 0 0 26px 26px;
   box-shadow: 0 12px 26px rgba(12, 60, 30, 0.16);
 }
-.hero__img { width: 100%; }
+.hero__img {
+  width: 100%;
+  height: clamp(360px, 78vw, 500px);
+  object-fit: cover;
+  object-position: 50% 22%; /* mantém o rosto visível */
+}
+
+/* Faixa inferior com blur + opacidade sobre a foto */
+.hero__overlay {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 22px 26px 44px;
+  line-height: 1.25;
+  text-align: center;
+  color: #fff;
+  background: linear-gradient(180deg, rgba(9, 51, 26, 0) 0%, rgba(9, 51, 26, 0.55) 45%, rgba(7, 42, 21, 0.72) 100%);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+}
+.hero__title {
+  margin: 0 0 8px;
+  font-size: clamp(1.5rem, 6.4vw, 2rem);
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.45);
+}
+.hero__subtitle {
+  margin: 0 auto;
+  max-width: 36ch;
+  font-size: clamp(0.86rem, 3.5vw, 1rem);
+  font-weight: 500;
+  line-height: 1.4;
+  color: rgba(255, 255, 255, 0.94);
+  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.4);
+}
 
 /* Barra: sociais acima do logo, subindo levemente sobre a foto */
 .hero__bar {
@@ -143,6 +195,7 @@ img { display: block; max-width: 100%; height: auto; }
   .socials { gap: 13px; }
   .brand img { height: 40px; }
   .hero__bar { margin-top: -24px; gap: 11px; }
+  .hero__overlay { padding: 18px 20px 40px; }
 }
 
 /* ===================== ACESSIBILIDADE ===================== */
