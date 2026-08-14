@@ -9,6 +9,17 @@
         { "type": "host", "value": "benfica.oralsinjuizdefora.com.br" }
       ],
       "destination": "/benfica"
+    },
+    {
+      "source": "/",
+      "has": [
+        { "type": "host", "value": "centro.oralsinjuizdefora.com.br" }
+      ],
+      "destination": "/centro"
+    },
+    {
+      "source": "/",
+      "destination": "/centro"
     }
   ]
 }
